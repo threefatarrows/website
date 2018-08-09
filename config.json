@@ -70,7 +70,7 @@
     "src": "style.css",
     "criticalCssConfigs": [{
       "out": "./new_dist/css/style.critical.css",
-      "url": "https://starter.silvestarbistrovic.from.hr",
+      "url": "https://threefatarrows.com",
       "width": 1920,
       "height": 1200,
       "keepLargerMediaQueries": true,
@@ -270,7 +270,7 @@
     "dest": "html/partials",
     "clean": "favicon/",
     "realFaviconConfig": {
-      "masterPicture": "./new_src/gfx/svg/starter-project.svg",
+      "masterPicture": "./new_src/gfx/svg/three-fat-arrows.svg",
       "dest": "./new_dist/favicon/",
       "iconsPath": "/favicon/",
       "design": {
@@ -284,7 +284,7 @@
             "precomposedIcons": true,
             "declareOnlyDefaultIcon": true
           },
-          "appName": "Starter Project"
+          "appName": "Three Fat Arrows"
         },
         "desktopBrowser": {},
         "windows": {
@@ -300,13 +300,13 @@
               "rectangle": true
             }
           },
-          "appName": "Starter Project"
+          "appName": "Three Fat Arrows"
         },
         "androidChrome": {
           "pictureAspect": "noChange",
           "themeColor": "#1ebada",
           "manifest": {
-            "name": "Starter Project",
+            "name": "Three Fat Arrows",
             "display": "standalone",
             "orientation": "notSet",
             "onConflict": "override",
@@ -357,7 +357,7 @@
     "dest": "docs/styleguide/",
     "clean": "docs/styleguide/",
     "kssConfig": {
-      "title": "Starter Project",
+      "title": "Three Fat Arrows",
       "source": "./new_src/scss/",
       "destination": "./new_dist/docs/styleguide/",
       "css": [
@@ -367,59 +367,6 @@
       "js": [
         "/js/foftFontLoading.js"
       ]
-    }
-  },
-  "sassdoc": {
-    "run": true,
-    "clean": "docs/sass/",
-    "sassdocConfig": {
-      "dest": "./new_dist/docs/sass/",
-      "package": {
-        "title": "Starter project",
-        "name": "starter-project",
-        "description": "A set of gulp tasks that helps you develop high performant websites using latest best practices.",
-        "license": "MIT",
-        "homepage": "https://github.com/maliMirkec/starter-project"
-      },
-      "autofill": true,
-      "verbose": true,
-      "display": {
-        "access": ["public", "private"],
-        "alias": true,
-        "watermark": true
-      },
-      "groups": {
-        "undefined": "Misc"
-      },
-      "basePath": "https://starter.silvestarbistrovic.from.hr/docs/sass/"
-    }
-  },
-  "jsdoc": {
-    "run": true,
-    "src": ["./new_src/js/homepage.md", "./new_src/js/"],
-    "clean": "docs/js/",
-    "jsdocConfig": {
-      "tags": {
-        "allowUnknownTags": true
-      },
-      "opts": {
-        "destination": "./new_dist/docs/js/"
-      },
-      "plugins": [
-        "plugins/markdown"
-      ],
-      "templates": {
-        "cleverLinks": true,
-        "monospaceLinks": false,
-        "default": {
-          "outputSourceFiles": true
-        },
-        "path": "ink-docstrap",
-        "theme": "simplex",
-        "navType": "vertical",
-        "linenums": true,
-        "dateFormat": "MMMM Do YYYY, h:mm:ss a"
-      }
     }
   }
 }
