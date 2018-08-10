@@ -1,0 +1,42 @@
+h1, h2, h3, h4, h5, h6 {
+  margin-top: .25rem;
+  margin-bottom: .5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+
+  font-family: $header-font;
+  font-weight: normal;
+  line-height: 1.2;
+  
+  @media (min-width: 600px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+h1 {
+  font-size: 250%;
+  @media (min-width: 450px) { font-size: 350%; }
+  
+  &.smaller {
+    font-size: 125%;
+    @media (min-width: 450px) { font-size: 200%; }
+  }
+}
+h2 {
+  font-size: 175%;
+  @media (min-width: 450px) { font-size: 250%; }
+}
+h3 {
+  font-size: 150%;
+  @media (min-width: 450px) { font-size: 225%; }
+  
+  &.smaller {
+    font-size: 100%;
+    @media (min-width: 450px) { font-size: 150%; }
+  }
+}
+
+h1, h2, h3 {
+  text-align: center;
+}

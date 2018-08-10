@@ -1,26 +1,172 @@
-const gulp = require('gulp')
-const requireDir = require('require-dir')
-const runSequence = require('run-sequence')
+const gulp = require('gulp');
+const plugins = require('gulp-load-plugins');
+const critical = require('critical').stream;
+const autoprefixer = require('autoprefixer');
+const browserSync = require('browser-sync');
+const browserify = require('browserify');
+const buffer = require('vinyl-buffer');
+const cache = require('gulp-cache');
+const imagemin = require('gulp-imagemin');
+const notify = require('gulp-notify');
+const source = require('vinyl-source-stream');
+const fs = require('fs');
 
-runSequence.options.ignoreUndefinedTasks = true
+const paths = {
+  js: {
+    src: './src/js/',
+    dest: './public/js/'
+  },
+  css: {
+    src: './src/scss/',
+    dest: './public/css/'
+  },
+  images: {
+    src: './src/img/**/*',
+    dest: './public/img/'
+  }
+};
 
-global.config = require('./config.json')
-global.bs = require('browser-sync').create()
 
-requireDir(global.config.root + global.config.gulp.src)
+/* ----------------- */
+/* Development
+/* ----------------- */
 
-gulp.task('dev:sequence', callback => runSequence('clean', global.config.gfx.run ? 'gfx' : null, global.config.fonts.run ? 'fonts' : null, global.config.js.run ? 'js' : null, global.config.jsdoc.run ? 'jsdoc' : null, global.config.css.run ? 'css' : null, global.config.html.run ? 'html:dev' : null, global.config.sassdoc.run ? 'sassdoc' : null, global.config.kss.run ? 'kss' : null, 'watch:dev', 'browser:sync', global.config.penthouse.run ? 'critical:dev' : null, global.config.kill.dev.run ? 'kill:delay' : null, callback))
+gulp.task('development', ['scripts', 'templates', 'styles'], () => {
+  browserSync({
+    server: {
+      baseDir: './public/'
+    },
+    open: false,
+    online: false,
+    notify: false,
+    snippetOptions: {
+      rule: {
+        match: /<\/body>/i,
+        fn: (snippet) => snippet
+      }
+    }
+  });
 
-gulp.task('dev', ['dev:sequence'])
+  gulp.watch(paths.css.src + '**/*.scss', ['styles']);
+  gulp.watch(paths.js.src + '**/*.js', ['scripts']);
+  gulp.watch('./pages/**/*.html', ['templates']);
+});
 
-gulp.task('docs:sequence', callback => runSequence('clean', global.config.gfx.run ? 'gfx' : null, global.config.fonts.run ? 'fonts' : null, global.config.js.run ? 'js' : null, global.config.jsdoc.run ? 'jsdoc' : null, global.config.css.run ? 'css' : null, global.config.sassdoc.run ? 'sassdoc' : null, global.config.kss.run ? 'kss' : null, global.config.html.run ? 'html:dev' : null, 'watch:docs', 'browser:sync', global.config.kill.docs.run ? 'kill:delay' : null, callback))
 
-gulp.task('docs', ['docs:sequence'])
+/* ----------------- */
+/* Scripts
+/* ----------------- */
 
-gulp.task('dist:sequence', callback => runSequence('clean', global.config.gfx.run ? 'gfx' : null, global.config.fonts.run ? 'fonts' : null, global.config.js.run ? 'js' : null, global.config.jsdoc.run ? 'jsdoc' : null, global.config.css.run ? 'css' : null, global.config.sassdoc.run ? 'sassdoc' : null, global.config.kss.run ? 'kss' : null, global.config.html.run ? 'html:dist' : null, 'watch:dist', 'browser:sync', global.config.penthouse.run ? 'critical:dist' : null, global.config.kill.dist.run ? 'kill:delay' : null, callback))
+gulp.task('scripts', () => {
+  return browserify({
+    'entries': [paths.js.src + 'index.js'],
+    'debug': true
+  })
+  .bundle()
+  .on('error', function () {
+    var args = Array.prototype.slice.call(arguments);
 
-gulp.task('dist', ['dist:sequence'])
+    plugins().notify.onError({
+      'title': 'Compile Error',
+      'message': '<%= error.message %>'
+    }).apply(this, args);
 
-gulp.task('deploy:sequence', callback => runSequence('clean', global.config.favicon.run ? 'favicon' : null, global.config.gfx.run ? 'gfx' : null, global.config.fonts.run ? 'fonts' : null, global.config.js.run ? 'js:deploy' : null, global.config.jsdoc.run ? 'jsdoc' : null, global.config.css.run ? 'css:deploy' : null, global.config.sassdoc.run ? 'sassdoc' : null, global.config.kss.run ? 'kss' : null, global.config.html.run ? 'html:dist' : null, 'watch:dist', 'browser:sync', global.config.penthouse.run ? 'critical:deploy' : null, global.config.gzip.run ? 'gzip' : null, global.config.kill.deploy.run ? 'kill:delay' : null, callback))
+    this.emit('end');
+  })
+  .pipe(source('index.min.js'))
+  .pipe(buffer())
+  .pipe(plugins().sourcemaps.init({'loadMaps': true}))
+  .pipe(plugins().sourcemaps.write('.'))
+  .pipe(gulp.dest(paths.js.dest))
+  .pipe(browserSync.stream());
+});
 
-gulp.task('default', ['deploy:sequence'])
+
+
+/* ----------------- */
+/* Templates
+/* ----------------- */
+gulp.task('templates', () => {
+  return gulp.src('./pages/**/*.+(html|nunjucks)')
+    .pipe(plugins().data(function() {
+      return require('./src/data.json')
+    }))
+    .pipe(plugins().nunjucksRender({
+      path: ['./templates/']
+    }))
+    .pipe(gulp.dest('public'))
+    .pipe(browserSync.stream());
+});
+
+
+/* ----------------- */
+/* Styles
+/* ----------------- */
+
+gulp.task('styles', () => {
+  return gulp.src(paths.css.src + '**/*.scss')
+    .pipe(plugins().sassGlob())
+    .pipe(plugins().sourcemaps.init())
+    .pipe(plugins().postcss([
+      autoprefixer({ browsers: ['last 2 versions'] })
+    ], { syntax: require('postcss-scss') }))
+    .pipe(plugins().sass().on('error', plugins().sass.logError))
+    .pipe(plugins().sourcemaps.write())
+    .pipe(gulp.dest(paths.css.dest))
+    .pipe(browserSync.stream());
+});
+
+
+/* ----------------- */
+/* Cssmin
+/* ----------------- */
+
+gulp.task('cssmin', () => {
+  return gulp.src(paths.css.src + '**/*.scss')
+    .pipe(plugins().sassGlob())
+    .pipe(plugins().sass({
+      'outputStyle': 'compressed'
+    }).on('error', plugins().sass.logError))
+    .pipe(gulp.dest(paths.css.dest));
+});
+
+
+/* ----------------- */
+/* Jsmin
+/* ----------------- */
+
+gulp.task('jsmin', () => {
+  var envs = plugins().env.set({
+    'NODE_ENV': 'production'
+  });
+
+  return browserify({
+    'entries': [paths.js.src + 'index.js'],
+    'debug': false
+  })
+  .bundle()
+  .pipe(source('index.min.js'))
+  .pipe(envs)
+  .pipe(buffer())
+  .pipe(plugins().uglify().on('error', plugins().util.log))
+  .pipe(envs.reset)
+  .pipe(gulp.dest(paths.js.dest));
+});
+
+
+
+// Generate & Inline Critical-path CSS
+gulp.task('critical', function () {
+  return gulp.src('public/**/*.html')
+    .pipe(critical({base: 'public/', inline: true, minify: true, css: ['public/css/emmashopeinc.css']}))
+    .on('error', function(err) { gutil.log(gutil.colors.red(err.message)); })
+    .pipe(gulp.dest('public'));
+});
+
+/* ----------------- */
+/* Taks
+/* ----------------- */
+
+gulp.task('default', ['development']);
+gulp.task('deploy', ['cssmin', 'jsmin']);
+gulp.task('crit', ['critical']);

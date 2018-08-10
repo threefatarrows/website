@@ -1,0 +1,112 @@
+{% extends "layout.nunjucks" %}
+
+{% set page_title = "gifts-of-hope" %}
+
+{% set num_sponsors = 31 %}
+{% set donation_total = 7100 %}
+{% set donation_goal = 7100 %}
+
+{% block site_title %}Give a Christmas Gift of Hope to Parents of Children Undergoing Cancer Treatment | {% endblock %}
+
+{% block page_class %}gifts-of-hope{% endblock %}
+
+{% block site_content %}
+  <section class="content-block">
+    <h1 class="site-title">Gifts of Hope</h1>
+  </section>
+  
+  <section class="content-block">
+    <h2>The Need</h2>
+    <p>The Christmas season is a wonderful time, but it can also bring along with it stress and anxiety, especially for those whose children are fighting for their lives. Help us provide a general gift card to allow families to use however they need, and bring them a little hope and joy this holiday season.</p>
+    <a class="button" href="/gifts-of-hope/2018/">Sponsor a Family Today</a>
+  </section>
+
+  <section class="content-block">
+    <h2>Past Years</h2>
+    <p>Look back on how you and the community helped families at Christmas time!</p>
+    <a href="/gifts-of-hope/2017">&larr; 2017</a>
+  </section>
+{% endblock %}
+
+{% block footer_scripts %}
+<script>
+  var PP_PERCENT = 0.022;
+  var PP_FEE = .30;
+  var BASE_GIFT = 100;
+  var AMT_SENT = 0.00;
+  
+  var progressDaysLeft      = document.querySelector('.js-days-left');
+  var progressDaysLabel     = document.querySelector('.js-days-label');
+  var progressDaysFull      = document.querySelector('.js-days-full');
+  
+  var sponsorAmount         = document.querySelector('.js-sponsor-amount');
+  var sponsorButtons        = document.querySelectorAll('.js-sponsor-button');
+  var sponsorSendAmount     = document.querySelector('.js-send-amount');
+  var sponsorTotal          = document.querySelector('.js-sponsor-total');
+  
+  // sponsorAmount.addEventListener('input', function(event) {
+  //   sponsorFamilies.innerHTML = (this.value > 1) ? "families" : "family";
+  //   AMT_SENT = (this.value * BASE_GIFT);
+  //   var amount = (AMT_SENT + PP_FEE) / (1 - PP_PERCENT);
+  //   sponsorSendAmount.value = amount.toFixed(2);
+  //   sponsorTotal.value = "$" + amount.toFixed(2) + " this Christmas";
+  // });
+  
+  Array.prototype.forEach.call(sponsorButtons, function(sponsorButton) {
+    sponsorButton.addEventListener('click', function(event) {
+      AMT_SENT = (this.value * BASE_GIFT);
+      var amount = (AMT_SENT + PP_FEE) / (1 - PP_PERCENT);
+      sponsorSendAmount.value = amount.toFixed(2);
+      sponsorTotal.value = "$" + amount.toFixed(2) + " this Christmas";
+    });
+  });
+  
+  function updateDays(daysEle, labelEle, labelFull) {
+    var endDate   = new Date('12/25/2017 12:0 AM');
+    var second = 1000;
+    var minute = second * 60;
+    var hour = minute * 60;
+    var day = hour * 24;
+    var timer;
+    
+    function calculateDays() {
+      var today = Date.now();
+      var difference = endDate - today;
+      
+      if (difference < 0) {
+        clearTimeout(timer);
+        daysEle.innerHTML = 'Yahoo!!';
+        labelFull.innerHTML = 'It\'s Christmas!!!!';
+        return;
+      }
+      
+      var days = Math.floor(difference / day);
+      var hours = Math.floor( (difference % day) / hour);
+      var minutes = Math.floor( (difference % hour) / minute);
+      var seconds = Math.floor( (difference % minute) / second);
+      
+      if (days > 0) {
+        // Greater than 1 day
+        daysEle.innerHTML = days;
+        labelEle.innerHTML = (days === 1) ? 'Day' : 'Days';
+      } else if (days < 1 && hours > 0) {
+        // Less than 1 day til Christmas!
+        daysEle.innerHTML = hours;
+        labelEle.innerHTML = (hours === 1) ? 'Hour' : 'Hours';
+      } else if (days < 1 && hours < 1 && minutes > 0) {
+        // Less than 1 hour left til Christmas!
+        daysEle.innerHTML = minutes;
+        labelEle.innerHTML = (minutes === 1) ? 'Minute' : 'Minutes';
+      } else if (days < 1 && hours < 1 && minutes < 1 && seconds > 0) {
+        // Less than 1 minute left til Christmas!
+        daysEle.innerHTML = seconds;
+        labelEle.innerHTML = (seconds === 1) ? 'Second' : 'Seconds';
+      }
+    }
+    
+    timer = setInterval(calculateDays, 1000);
+  }
+  
+  updateDays(progressDaysLeft, progressDaysLabel, progressDaysFull);
+</script>
+{% endblock %}

@@ -1,0 +1,26 @@
+.border {
+  $border-color: $xmas-gray;
+  $border-width: 1px;
+  
+  &-top     { border-top: $border-width solid $border-color; }
+  &-right   { border-right: $border-width solid $border-color; }
+  &-bottom  { border-bottom: $border-width solid $border-color; }
+  &-left    { border-left: $border-width solid $border-color; }
+  
+  &-vertical {
+    border: $border-width solid $border-color;
+    border-width: $border-width 0;
+  }
+  
+  &-horizontal {
+    border: $border-width solid $border-color;
+    border-width: 0 $border-width;
+  }
+  
+  &-top--mobile {
+    @media (max-width: 739px) {
+      border: $border-width solid $border-color;
+      border-width: $border-width 0 0 0;
+    }
+  }
+}

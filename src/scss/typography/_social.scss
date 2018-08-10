@@ -1,0 +1,23 @@
+.social {
+  margin-right: .5rem;
+
+  font-size: 350%;
+  line-height: 1;
+  text-decoration: none;
+
+  @media (min-width: 540px) {
+    font-size: 300%;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.social-r {
+  font-family: $social-r;
+}
+
+.social-p {
+  font-family: $social-p;
+}

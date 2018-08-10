@@ -1,0 +1,50 @@
+.image {
+  margin-bottom: 2rem;
+  
+  &--center {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &--half {
+    @media (min-width: 540px) {
+      max-width: 50%;
+    }
+  }
+
+  &--crop {
+    max-height: 300px;
+    width: 100%;
+    object-fit: cover;
+    object-position: 0 20%;
+
+    @media (min-width: 540px) {
+      max-height: initial;
+      object-fit: initial;
+    }
+  }
+
+  &--right {
+    @media (min-width: 540px) {
+      float: right;
+      margin-left: 2rem;
+    }
+
+    @media (min-width: 860px) {
+      margin-left: -2rem;
+      transform: translateX(100px);
+    }
+  }
+
+  &--left {
+    @media (min-width: 540px) {
+      float: left;
+      margin-right: 2rem;
+    }
+
+    @media (min-width: 860px) {
+      margin-right: -2rem;
+      transform: translateX(-100px);
+    }
+  }
+}

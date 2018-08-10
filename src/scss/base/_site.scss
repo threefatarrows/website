@@ -1,0 +1,16 @@
+.site {
+  margin: 0;
+
+  &-title {
+    margin-top: 2rem;
+    margin-bottom: 3.5rem;
+    
+    line-height: 1.2;
+
+    @media (min-width: 450px) {
+      margin-top: 3rem;
+      margin-bottom: 5rem;
+      line-height: 1;
+    }
+  }
+}

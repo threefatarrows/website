@@ -1,0 +1,66 @@
+.site-footer {
+  margin-bottom: 3rem;
+  padding-bottom: 1rem;
+
+  // background: url('../img/footer-flowers--full@2x.jpg') bottom right no-repeat;
+  // background-size: 40%;
+
+  @media (min-width: 840px) {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+
+    margin-bottom: 0;
+
+    // background-size: 350px;
+  }
+
+  &__col {
+    margin-bottom: 4rem;
+    text-align: center;
+
+    @media (min-width: 840px) {
+      flex: 1 0 calc(100% / 3);
+
+      h3 {
+        
+        @media (min-width: 840px) {
+          font-size: 180%;
+        }
+      }
+    }
+
+    a {
+      display: block;
+      margin-bottom: .5rem;
+
+      color: $pink;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      &.social {
+        display: inline-block;
+      }
+    }
+  }
+
+  &__legal {
+    font-size: 100%;
+    text-align: center;
+
+    @media (min-width: 840px) {
+      flex-basis: 100%;
+      margin-left: 0;
+    }
+
+    span {
+      display: block;
+      
+      a {
+        color: inherit;
+      }
+    }
+  }
+}

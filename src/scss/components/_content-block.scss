@@ -1,0 +1,75 @@
+.content-block {
+  max-width: 60ch;
+  margin: 0 auto 3.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  
+  &.margin-top { margin-top: 2rem; }
+  
+  @media (min-width: 740px) {
+    margin: 0 auto 4rem;
+    
+    &.margin-top { margin-top: 4rem; }
+  }
+  
+  .landing & {
+    max-width: 80ch;
+  }
+
+  @media (min-width: 700px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  @media (min-width: 1400px) {
+    max-width: 80ch;
+  }
+  
+  @media (min-width: 1650px) {
+    max-width: 90ch;
+  }
+
+  h2, h3 {
+    padding-left: 0;
+    padding-right: 0;
+    text-align: left;
+  }
+  
+  h3 {
+    margin-top: 3rem;
+  }
+
+  p {
+    margin-left: 0;
+    
+    &.helper {
+      margin-top: -1rem;
+      margin-bottom: 2rem;
+    }
+  }
+
+  dl div {
+    margin-bottom: 1rem;
+  }
+
+  dt,
+  dd {
+    display: inline-block;
+    vertical-align: top;
+  }
+    dt {
+      min-width: 80px;
+      padding-right: 1rem;
+
+      font-weight: bold;
+      text-align: right;
+    }
+
+    dl.list--wide dt {
+      min-width: 150px;
+    }
+
+    dd {
+      margin: 0;
+    }
+}

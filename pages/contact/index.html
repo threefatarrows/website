@@ -1,0 +1,36 @@
+{% extends "layout.nunjucks" %}
+
+{% set page_title = "contact" %}
+
+{% block site_title %}Contact Us via Mail, Email, or Phone | {% endblock %}
+
+{% block page_class %}contact{% endblock %}
+
+{% block site_content %}
+  <section class="content-block">
+    <h1 class="site-title">Contact Us</h1>
+  </section>
+
+  <section class="content-block">
+    <h2>Mailing Address</h2>
+    <address>
+      Emma's Hope, Inc.<br>
+      PO Box 105<br>
+      Sherrill, NY 13461
+    </address>
+  </section>
+
+  <section class="content-block">
+    <h2>Contact Info</h2>
+    <dl class="list--left">
+      <div>
+        <dt>Email:</dt>
+        <dd><a href="mailto:hello@emmashopeinc.org">hello@emmashopeinc.org</a></dd>
+      </div>
+      <div>
+        <dt>Phone:</dt>
+        <dd><a href="tel:13152175567">+1 315 217 5567</a></dd>
+      </div>
+    </dl>
+  </section>
+{% endblock %}

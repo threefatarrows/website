@@ -1,0 +1,16 @@
+{
+  "NavItems" : [
+    {
+      "slug": "case-studies",
+      "name": "Case Studies"
+    },
+    {
+      "slug": "about",
+      "name": "About"
+    },
+    {
+      "slug": "schedule-an-appointment",
+      "name": "Schedule An Appointment"
+    }
+  ]
+}

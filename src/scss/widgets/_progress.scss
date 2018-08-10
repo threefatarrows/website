@@ -1,0 +1,56 @@
+.progress {
+  
+  &-goal {
+    margin-bottom: 1rem;
+    
+    font-size: 200%;
+    font-weight: 300;
+    text-align: center;
+  }
+  
+  $progress-height: 30px;
+  
+  &-bar {
+    width: 100%;
+    height: $progress-height;
+    
+    background: $xmas-gray;
+    border-radius: $progress-height / 2;
+    overflow: hidden;
+  }
+  
+  &-meter {
+    height: $progress-height;
+    max-width: 100%;
+    
+    float: left;
+    
+    background: $xmas-green;
+  }
+  
+  &-stats {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+    
+    margin-top: 1rem;
+  }
+  
+    &-stat {
+      margin-bottom: 1rem;
+      
+      flex-basis: 50%;
+      text-align: center;
+      
+      @media (min-width: 540px) {
+        margin-bottom: 0;
+        flex-basis: auto;
+        text-align: left;
+      }
+    }
+    
+      &-number {
+        display: block;
+      }
+}
