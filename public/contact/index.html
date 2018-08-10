@@ -2,7 +2,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>{% block site_title %}{% endblock %}Emma's Hope, Inc</title>
+  <title>Contact Us via Mail, Email, or Phone | Emma's Hope, Inc</title>
 
   <meta name="description" content="Emma's Hope, Inc. is a nonprofit organization supporting parents of children diagnosed with life-threatening illnesses. 100% of public donations go to supporting these parents.">
   <meta name="keywords" content="charity, syracuse, give, help, parents, families, children, new york, life-threatening, illness, cancer, leukemia, childhood cancer, central new york, life-threatening illness, child diagnosed">
@@ -10,13 +10,13 @@
   <meta itemprop="description" content="Emma's Hope, Inc. is a nonprofit organization supporting parents of children diagnosed with life-threatening illnesses. 100% of public donations go to supporting these parents.">
   <meta itemprop="image" content="https://emmashopeinc.org/img/logo@2x.png">
   
-  {% block share_meta %}
+  
   <meta property="og:url" content="https://emmashopeinc.org/donate/" />
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Giving Hope to Parents of Severly Ill Children" />
   <meta property="og:description" content="Emma's Hope, Inc. is a nonprofit organization supporting parents of children with life-threatening illnesses. 100% of public donations go to supporting these parents." />
   <meta property="og:image" content="https://emmashopeinc.org/img/emma-mission--full.jpg" />
-  {% endblock share_meta %}
+  
   
   <meta name="google-site-verification" content="fdAk1yrHsa9ska_kW0rZwwRoR21z13u2ZBKJ0C-pM-4" />
 
@@ -56,18 +56,98 @@
   <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
 </head>
-<body class="site {% block page_class %}{% endblock %}">
-  {% include "partials/landing/header.nunjucks" %}
+<body class="site contact">
+  
+    
+  
+  <header class="site-header  js-site-header" role="header">
+  <a class="header-logo" href="/">
+    <img width="150" style="max-height: 42px" src="/img/site-logo_color_horizontal_stacked.svg" alt="E logo">
+  </a>
+  <div class="header-links">
+    <a class="nav-logo" href="/">
+      <img width="24" style="max-height: 24px" src="/img/logo.svg" alt="E logo">
+    </a>
+    <a class="mobile-donate button" href="/donate/">Donate</a>
+    <nav class="header-nav" role="navigation">
+  <ul>
+    
+      <li><a class="" href="/case-studies/">Case Studies</a></li>
+    
+      <li><a class="" href="/about/">About</a></li>
+    
+      <li><a class="" href="/schedule-an-appointment/">Schedule An Appointment</a></li>
+    
+  </ul>
+</nav>
+    <button class="mobile-menu button button--nobg  js-mobile-menu" aria-label="Mobile Menu">Menu</button>
+  </div>
+</header>
 
   <main class="site-content" role="content">
-    {% block site_content %}{% endblock %}
+    
+  <section class="content-block">
+    <h1 class="site-title">Contact Us</h1>
+  </section>
+
+  <section class="content-block">
+    <h2>Mailing Address</h2>
+    <address>
+      Emma's Hope, Inc.<br>
+      PO Box 105<br>
+      Sherrill, NY 13461
+    </address>
+  </section>
+
+  <section class="content-block">
+    <h2>Contact Info</h2>
+    <dl class="list--left">
+      <div>
+        <dt>Email:</dt>
+        <dd><a href="mailto:hello@emmashopeinc.org">hello@emmashopeinc.org</a></dd>
+      </div>
+      <div>
+        <dt>Phone:</dt>
+        <dd><a href="tel:13152175567">+1 315 217 5567</a></dd>
+      </div>
+    </dl>
+  </section>
+
   </main>
 
-  {% block cta %}
-    {% include "partials/cta.nunjucks" %}
-  {% endblock %}
+  
+    <section class="cta padding-vertical text-center bg--darkblue">
+  <h3>Help a Family Today</h3>
+  <p class="cta-copy maxw">Your gift today helps a family focus on caring for their child who is fighting for their life, instead of worrying about making ends meet.</p>
+  <a class="cta-button button button--large" href="/donate/">Donate Now</a>
+</section>
+  
 
-  {% include "partials/footer.nunjucks" %}
+  <footer class="site-footer padding-top" role="footer">
+  <div class="site-footer__col">
+    <h3>Mailing Address</h3>
+    <address>
+    Emma's Hope, Inc.<br>
+    PO Box 105<br>
+    Sherrill, NY, 13461
+    </address>
+  </div>
+  <div class="site-footer__col">
+    <h3>Connect With Us</h3>
+    <a href="mailto:hello@emmashopeinc.org">hello@emmashopeinc.org</a>
+    <a href="tel:+13152175567">+1 315 217 5567</a>
+  </div>
+  <div class="site-footer__col">
+    <h3>Stay Updated</h3>
+    <a class="social social-r" href="https://www.facebook.com/emmashopeinc/" target="_blank">f</a>
+    <a class="social social-p" href="https://instagram.com/emmashopeinc" target="_blank">i</a>
+  </div>
+  <p class="site-footer__legal">
+    <span>Est. Aug 2017.</span>
+    <span>Emma's Hope, Inc. is a registered 501(c)(3) nonprofit charitable organization.</span>
+    <span><a href="/privacy/">Privacy Policy</a> &nbsp; &bull; &nbsp; ein: 82-2472806</span>
+  </p>
+</footer>
 
   <script>
     var headerEl = document.querySelector('.js-site-header');
@@ -81,6 +161,6 @@
     mobileTrigger.addEventListener('click', toggleMobileMenu, false);
   </script>
   
-  {% block footer_scripts %}{% endblock %}
+  
 
 </body>
